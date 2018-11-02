@@ -10,6 +10,10 @@ namespace ArithEval
     {
         static void Main(string[] args)
         {
+            string s = System.Console.ReadLine();
+            Parser p = new Parser(new NodeFactory());
+            Expr e = p.Parse(s);
+            System.Console.WriteLine(e.ToString());
         }
     }
 }
