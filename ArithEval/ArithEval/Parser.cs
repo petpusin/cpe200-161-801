@@ -34,7 +34,7 @@ namespace ArithEval
                 {
                     e = nf.Add(e, e2);
                 }
-                else if (op == '+')
+                else if (op == '-')
                 {
                     e = nf.Subtract(e, e2);
                 }
@@ -47,6 +47,8 @@ namespace ArithEval
             Expr e = ParseFactor(s);
             while (pos < s.Length && s[pos] == '*')
             {
+                char op = s[pos];
+                Consume(s, op);
                 Expr e2 = ParseFactor(s);
                 e = nf.Multiply(e, e2);
             }
@@ -82,9 +84,9 @@ namespace ArithEval
         protected Expr ParseNumber(string s)
         {
             int n = 0;
-            while (s[pos] >= '0' && s[pos] <= '9')
+            while (pos < s.Length && (s[pos] >= '0' && s[pos] <= '9'))
             {
-                n = n * 10 + s[pos];
+                n = n * 10 + (s[pos] - '0');
                 pos++;
             }
             return nf.Number(n);
