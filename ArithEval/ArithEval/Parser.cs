@@ -62,6 +62,12 @@ namespace ArithEval
                 Consume(s, ')');
                 return e;
             }
+            else if (s[pos] == '-')
+            {
+                Consume(s, '-');
+                Expr e = ParseFactor(s);
+                return nf.Negate(e);
+            }
             else if (s[pos] >= '0' && s[pos] <= '9')
             {
                 return ParseNumber(s);
